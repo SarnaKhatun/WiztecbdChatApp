@@ -217,32 +217,7 @@ class ClientController extends Controller
     }
 
 
-    public function groupList(Request $request)
-    {
-        $user = Auth::user();
-        if ($user) {
-            if ($user->role = 2) {
-                $groupList = GroupDetail::where('user_id', Auth::user()->id)->with('group')->select('id', 'user_id', 'group_id')->latest()->paginate();
-                if (count($groupList) > 0) {
-                    return response()->json([
-                        'status' => true,
-                        'lists' => $groupList,
-                    ], 200);
-                } else {
-                    return response()->json([
-                        'status' => false,
-                        'message' => "Group Lists Not Found",
-                    ], 200);
-                }
-            } else {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'You are not a Client',
-                ], 200);
-            }
-        }
 
-    }
 
 
 }

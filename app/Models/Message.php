@@ -31,8 +31,5 @@ class Message extends Model
         return $this->hasOne(MessageGroup::class, 'id', 'group_id');
     }
 
-    public function group()
-    {
-        return $this->hasMany(MessageGroup::class);
-    }
+
 }

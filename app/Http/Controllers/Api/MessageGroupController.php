@@ -209,4 +209,31 @@ class MessageGroupController extends Controller
         }
     }
 
+
+    public function GroupWiseMessageList(Request $request)
+    {
+        $user = Auth::user();
+        if ($user) {
+            $list = MessageGroup::where('user_id', $user->id)->with('groupDetail','messages')->select('id',
+                'group_name',
+                'user_id')->orderBy('id', 'DESC')->paginate(15);
+            if (count($list) > 0) {
+                return response()->json([
+                    'status' => true,
+                    'lists' => $list,
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => " Data Lists Not Found",
+                ], 200);
+            }
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Invalid Token",
+            ], 200);
+        }
+    }
+
 }

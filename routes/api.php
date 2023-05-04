@@ -18,6 +18,8 @@ use App\Http\Controllers\OTPSendEmailController;
 
 use App\Http\Controllers\Api\GroupMessageListController;
 
+use App\Http\Controllers\Api\SingleMessageController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,7 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/update-message-group', [MessageGroupController::class, 'update']);
     Route::post('/delete-message-group', [MessageGroupController::class, 'delete']);
     Route::post('/group/list', [MessageGroupController::class, 'groupList']);
-    Route::post('/group-wise-message', [MessageGroupController::class, 'groupWiseMessage']);
+    Route::post('/group-wise-message', [MessageGroupController::class, 'GroupWiseMessageList']);
 
     Route::post('/create-group-details', [GroupDetailsController::class, 'create']);
     Route::post('/delete-group-details', [GroupDetailsController::class, 'delete']);
@@ -65,7 +67,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ClientController::class, 'Profile']);
 
 
-    Route::post('/client/group/list', [ClientController::class, 'groupList']);
+    Route::post('/client/group/list', [GroupMessageListController::class, 'groupList']);
 
 
 
@@ -83,6 +85,15 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/admin/group/message/list', [GroupMessageListController::class, 'adminMessageList']);
     Route::post('/client-staff/group/message/list', [GroupMessageListController::class, 'clientStaffMessageList']);
+
+    //Individual message
+
+    Route::post('/create-individual-message-system', [SingleMessageController::class, 'clientStaffMessageList']);
+
+
+
+
+    Route::get('/my-group-message-list/{group_id}', [GroupMessageListController::class, 'myGroupMessageList']);
 
 
 

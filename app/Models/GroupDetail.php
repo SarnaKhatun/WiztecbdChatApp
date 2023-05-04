@@ -22,7 +22,7 @@ class GroupDetail extends Model
 
     public function messages()
     {
-        return $this->belongsTo(Message::class);
+        return $this->hasOne(Message::class,'id', 'group_id')->with(['groupDetails', 'messageDetails']);
     }
 
 }

@@ -17,12 +17,12 @@ class MessageGroup extends Model
 
     public function groupDetail ()
     {
-        return $this->belongsTo(GroupDetail::class, 'group_id', 'id');
+        return $this->hasMany(GroupDetail::class, 'group_id', 'id');
     }
 
 
     public function messages ()
     {
-        return $this->belongsTo(Message::class, 'group_id', 'id');
+        return $this->hasMany(Message::class, 'group_id', 'id')->with('messageDetails');
     }
 }
